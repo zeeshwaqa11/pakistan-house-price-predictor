@@ -54,6 +54,12 @@ def load_split(setup: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     return apply_split(df, splits, setup)
 
 
+def load_train(setup: str) -> pd.DataFrame:
+    df = pd.read_parquet(config.PATHS.listings)
+    splits = pd.read_parquet(config.PATHS.splits)
+    return apply_split(df, splits, setup)[0]
+
+
 def describe_splits(df: pd.DataFrame, splits: pd.DataFrame) -> str:
     lines = []
     for setup in SETUPS:

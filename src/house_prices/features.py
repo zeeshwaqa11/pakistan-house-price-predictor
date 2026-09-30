@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, TargetEncoder
 
@@ -116,9 +117,7 @@ def build_preprocessor(scale: bool = False, location_encoding: str = "target") -
         location = TargetEncoder(
             target_type="continuous",
             smooth=config.TARGET_ENCODER_SMOOTH,
-            cv=config.TARGET_ENCODER_CV,
-            shuffle=True,
-            random_state=config.RANDOM_STATE,
+            cv=KFold(n_splits=config.TARGET_ENCODER_CV, shuffle=True, random_state=config.RANDOM_STATE),
         )
     elif location_encoding == "onehot":
         location = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
