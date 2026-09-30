@@ -90,9 +90,7 @@ def prepare(raw: pd.DataFrame, settings: CleaningSettings) -> tuple[pd.DataFrame
     area_sqft = units.area_series_to_sqft(
         canonical["area_size"], canonical["area_unit"], canonical["area_text"], marla_sqft
     )
-    unit_from_text = canonical["area_text"].map(
-        lambda t: (units.parse_area_text(t) or [(None, None)])[0][1]
-    )
+    unit_from_text = canonical["area_text"].map(lambda t: (units.parse_area_text(t) or [(None, None)])[0][1])
     parsed = pd.DataFrame(
         {
             "listing_id": canonical["listing_id"],
@@ -259,42 +257,46 @@ FILTER_STEPS = [
     Step("rare_type", "filter", "Property type with too few listings", rule_rare_type),
 ]
 
-STEPS = (
-    FILTER_STEPS
-    + [
-        Step(
-            "coordinates",
-            "transform",
-            "Coordinates outside Pakistan or too far from the listing's city centre set to missing "
-            "(rows kept)",
-            transform_fn=transform_coordinates,
-        ),
-        Step(
-            "exact_duplicates",
-            "filter",
-            "Exact duplicate listings (every cleaned column identical)",
-            rule_exact_duplicates,
-        ),
-        Step(
-            "near_duplicates",
-            "filter",
-            "Near duplicates: same city, location, size, price, bedrooms and type",
-            rule_near_duplicates,
-        ),
-        Step(
-            "ppsf_outliers",
-            "filter",
-            "Price per sq ft outside the per-city IQR fence on log price per sq ft",
-            rule_ppsf_outliers,
-        ),
-    ]
-)
+STEPS = FILTER_STEPS + [
+    Step(
+        "coordinates",
+        "transform",
+        "Coordinates outside Pakistan or too far from the listing's city centre set to missing (rows kept)",
+        transform_fn=transform_coordinates,
+    ),
+    Step(
+        "exact_duplicates",
+        "filter",
+        "Exact duplicate listings (every cleaned column identical)",
+        rule_exact_duplicates,
+    ),
+    Step(
+        "near_duplicates",
+        "filter",
+        "Near duplicates: same city, location, size, price, bedrooms and type",
+        rule_near_duplicates,
+    ),
+    Step(
+        "ppsf_outliers",
+        "filter",
+        "Price per sq ft outside the per-city IQR fence on log price per sq ft",
+        rule_ppsf_outliers,
+    ),
+]
 
 
 def run_steps(df: pd.DataFrame, settings: CleaningSettings, steps=None) -> tuple[pd.DataFrame, list[dict]]:
     steps = STEPS if steps is None else steps
-    funnel = [{"key": "raw", "kind": "start", "description": "Rows in the raw file", "removed": 0,
-               "modified": 0, "remaining": len(df)}]
+    funnel = [
+        {
+            "key": "raw",
+            "kind": "start",
+            "description": "Rows in the raw file",
+            "removed": 0,
+            "modified": 0,
+            "remaining": len(df),
+        }
+    ]
     for step in steps:
         before = len(df)
         modified = 0
@@ -334,7 +336,7 @@ def funnel_markdown(funnel: list[dict], info: dict, settings: CleaningSettings, 
         f"- Source file: `{meta['source_file']}`",
         f"- SHA-256: `{meta['file_sha256']}`",
         f"- Raw rows: {meta['raw_rows']:,}",
-        f"- Cleaned rows: {meta['clean_rows']:,} ({meta['clean_rows'] / max(meta['raw_rows'], 1):.1%} of raw)",
+        f"- Cleaned rows: {meta['clean_rows']:,} ({meta['clean_rows'] / max(meta['raw_rows'], 1):.1%})",
     ]
     if meta.get("synthetic"):
         lines.append("- **This report was produced from SYNTHETIC data. It is not a result.**")
@@ -358,7 +360,7 @@ def funnel_markdown(funnel: list[dict], info: dict, settings: CleaningSettings, 
         f"- Sq ft per Marla: **{info['marla_sqft']}** ({info['marla_source']}).",
         f"- 1 Kanal = {config.KANAL_IN_MARLA} Marla, 1 sq yd = {config.SQYD_SQFT:g} sq ft, "
         f"1 sq m = {config.SQM_SQFT} sq ft.",
-        f"- Prices stored as text (for example \"1.5 Crore\" or \"85 Lakh\") converted to rupees: "
+        f'- Prices stored as text (for example "1.5 Crore" or "85 Lakh") converted to rupees: '
         f"{info['text_prices']:,} rows.",
         "",
         "## Thresholds",

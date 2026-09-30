@@ -118,9 +118,7 @@ def area_text_to_sqft(text, marla_sqft: float) -> float:
     return float(sum(value * sqft_per_unit(unit, marla_sqft) for value, unit in pairs))
 
 
-def area_series_to_sqft(
-    size: pd.Series, unit: pd.Series, text: pd.Series, marla_sqft: float
-) -> pd.Series:
+def area_series_to_sqft(size: pd.Series, unit: pd.Series, text: pd.Series, marla_sqft: float) -> pd.Series:
     size_num = pd.to_numeric(size, errors="coerce")
     units = unit.map(normalise_unit)
     factor = units.map(lambda u: sqft_per_unit(u, marla_sqft) if u else np.nan).astype(float)

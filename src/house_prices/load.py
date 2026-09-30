@@ -40,9 +40,7 @@ def read_csv_any_encoding(path: Path) -> pd.DataFrame:
 def load_raw(path: Path | None = None) -> pd.DataFrame:
     path = Path(path) if path else config.PATHS.raw_csv
     if not path.exists():
-        raise DataMissingError(
-            f"Dataset not found at {path}\n" + config.DOWNLOAD_HINT.format(path=path)
-        )
+        raise DataMissingError(f"Dataset not found at {path}\n" + config.DOWNLOAD_HINT.format(path=path))
     return read_csv_any_encoding(path)
 
 
