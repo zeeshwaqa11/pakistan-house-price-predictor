@@ -15,6 +15,11 @@ TARGET_ENCODER_SMOOTH = "auto"
 TARGET_ENCODER_CV = 5
 SHAP_SAMPLE_SIZE = 2000
 COMPARABLES = 5
+INPUT_LIMITS = {"area_sqft": (100.0, 1_000_000.0), "bedrooms": (1, 15), "baths": (1, 15)}
+DISCLAIMER = (
+    "Estimates are based on historical asking prices from property listings, not sale prices, and are for "
+    "learning purposes only. They are not financial or property advice."
+)
 MIN_GROUP_FOR_ERROR_TABLE = 30
 
 DATASET_NAME = "Pakistan House Price Dataset"

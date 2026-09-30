@@ -270,6 +270,10 @@ def write_metadata(chosen: dict, setup: str, train_df: pd.DataFrame, summaries: 
             "categorical": features.CATEGORICAL_FEATURES,
             "location": features.LOCATION_FEATURE,
         },
+        "categories": {
+            "city": sorted(train_df["city"].unique().tolist()),
+            "property_type": sorted(train_df["property_type"].unique().tolist()),
+        },
         "target": "log(price in PKR)",
         "min_location_count": config.MIN_LOCATION_COUNT,
         "rare_location_count": config.RARE_LOCATION_COUNT,
