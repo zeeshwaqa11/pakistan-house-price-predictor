@@ -1,0 +1,1509 @@
+{
+  "meta": {
+    "generated_at": "2026-09-30T10:49:55+00:00",
+    "synthetic_data": false,
+    "deployed_setup": "random",
+    "deployed_model": "xgboost",
+    "data_rows_raw": 191393,
+    "data_rows_clean": 67073,
+    "marla_sqft": 272.25,
+    "test_size": 0.2,
+    "cv_folds": 5
+  },
+  "setups": {
+    "random": {
+      "train_rows": 53658,
+      "test_rows": 13415,
+      "train_date_range": [
+        "2018-08-05",
+        "2019-08-06"
+      ],
+      "test_date_range": [
+        "2018-08-05",
+        "2019-08-06"
+      ],
+      "search_rows": 40000,
+      "chosen_model": "xgboost",
+      "models": {
+        "baseline_median": {
+          "label": "Baseline: overall median price",
+          "test": {
+            "mae_pkr": 17569734.625419308,
+            "rmse_pkr": 39621336.58644994,
+            "mdape": 0.6142857142857141,
+            "mape": 0.9683503335334231,
+            "r2_log": -0.0056440539016346936,
+            "rmse_log": 1.0004070597477817
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.9963056681427906,
+              "std": 0.00835746406852506
+            },
+            "r2_log": {
+              "mean": -0.004271346109220131,
+              "std": 0.001669701835372421
+            },
+            "mae_pkr": {
+              "mean": 17670273.725,
+              "std": 345765.5079695396
+            },
+            "mdape": {
+              "mean": 0.6063609791742781,
+              "std": 0.004546147296297019
+            }
+          },
+          "best_params": {}
+        },
+        "baseline_location_ppsf": {
+          "label": "Baseline: location median price/sq ft x size",
+          "test": {
+            "mae_pkr": 7590004.564918503,
+            "rmse_pkr": 30276781.590409398,
+            "mdape": 0.21777777777777677,
+            "mape": 0.35221347127028785,
+            "r2_log": 0.8198964474406383,
+            "rmse_log": 0.4233657709724325
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.4227684098139897,
+              "std": 0.004894328173192044
+            },
+            "r2_log": {
+              "mean": 0.8190742106542339,
+              "std": 0.006243749300246582
+            },
+            "mae_pkr": {
+              "mean": 7523186.039868815,
+              "std": 254070.14627087922
+            },
+            "mdape": {
+              "mean": 0.22001490427663145,
+              "std": 0.002050031075708266
+            }
+          },
+          "best_params": {}
+        },
+        "linear_regression": {
+          "label": "Linear Regression",
+          "test": {
+            "mae_pkr": 6816478.415132782,
+            "rmse_pkr": 18503575.65821467,
+            "mdape": 0.21067811065637262,
+            "mape": 0.3039398362511527,
+            "r2_log": 0.8569867907280322,
+            "rmse_log": 0.3772616666642249
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.37990493701736294,
+              "std": 0.0050306324871768685
+            },
+            "r2_log": {
+              "mean": 0.8538979119542418,
+              "std": 0.005322886750092954
+            },
+            "mae_pkr": {
+              "mean": 6975755.518200691,
+              "std": 88494.26663004507
+            },
+            "mdape": {
+              "mean": 0.21588313813402102,
+              "std": 0.0017560814642999017
+            }
+          },
+          "best_params": {}
+        },
+        "ridge": {
+          "label": "Ridge",
+          "test": {
+            "mae_pkr": 6844386.913525527,
+            "rmse_pkr": 18563913.538431086,
+            "mdape": 0.2110599250143719,
+            "mape": 0.3042007983304485,
+            "r2_log": 0.8568166084880948,
+            "rmse_log": 0.3774860660294511
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.3790981973967368,
+              "std": 0.004452409791353149
+            },
+            "r2_log": {
+              "mean": 0.8545429361123551,
+              "std": 0.004366814015729814
+            },
+            "mae_pkr": {
+              "mean": 7008411.183296664,
+              "std": 74748.79982518607
+            },
+            "mdape": {
+              "mean": 0.21600662204156945,
+              "std": 0.0022064388076872806
+            }
+          },
+          "best_params": {
+            "model__alpha": 8.471801418819979
+          }
+        },
+        "random_forest": {
+          "label": "Random Forest",
+          "test": {
+            "mae_pkr": 4974786.85885972,
+            "rmse_pkr": 15609330.362470001,
+            "mdape": 0.14513750646028847,
+            "mape": 0.21504608833065358,
+            "r2_log": 0.9152443795272718,
+            "rmse_log": 0.29042824906681297
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.30135261858830387,
+              "std": 0.003520772815626955
+            },
+            "r2_log": {
+              "mean": 0.9080891765629584,
+              "std": 0.0026413630229383633
+            },
+            "mae_pkr": {
+              "mean": 5291460.704617225,
+              "std": 113435.1207167839
+            },
+            "mdape": {
+              "mean": 0.15081184075343002,
+              "std": 0.0017812462624945573
+            }
+          },
+          "best_params": {
+            "model__max_depth": 17,
+            "model__max_features": 0.759195090518222,
+            "model__min_samples_leaf": 7,
+            "model__n_estimators": 241
+          }
+        },
+        "xgboost": {
+          "label": "XGBoost",
+          "test": {
+            "mae_pkr": 4731106.248862352,
+            "rmse_pkr": 14461638.229460979,
+            "mdape": 0.13610217298243743,
+            "mape": 0.19707118005884633,
+            "r2_log": 0.9285376608730309,
+            "rmse_log": 0.2666817010040386
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.2764812728956598,
+              "std": 0.0036138067713895475
+            },
+            "r2_log": {
+              "mean": 0.9226355896058148,
+              "std": 0.00227477021997425
+            },
+            "mae_pkr": {
+              "mean": 4868174.076517187,
+              "std": 69181.65124963253
+            },
+            "mdape": {
+              "mean": 0.14083374128953013,
+              "std": 0.0023865755846229843
+            }
+          },
+          "best_params": {
+            "model__colsample_bytree": 0.6399899663272012,
+            "model__learning_rate": 0.07169690872413222,
+            "model__max_depth": 8,
+            "model__min_child_weight": 4,
+            "model__n_estimators": 659,
+            "model__reg_lambda": 4.170553216181044,
+            "model__subsample": 0.7061753482887407
+          }
+        },
+        "lightgbm": {
+          "label": "LightGBM",
+          "test": {
+            "mae_pkr": 4702387.483920031,
+            "rmse_pkr": 15084514.965928096,
+            "mdape": 0.1366382495243277,
+            "mape": 0.19804061018791205,
+            "r2_log": 0.9279080192240927,
+            "rmse_log": 0.2678539664503471
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.27669844478192457,
+              "std": 0.003180470991652696
+            },
+            "r2_log": {
+              "mean": 0.9225176761083411,
+              "std": 0.0020375347721546884
+            },
+            "mae_pkr": {
+              "mean": 4961181.295098868,
+              "std": 88278.59146295775
+            },
+            "mdape": {
+              "mean": 0.1418935774223608,
+              "std": 0.001578246607696969
+            }
+          },
+          "best_params": {
+            "model__colsample_bytree": 0.7164916560792167,
+            "model__learning_rate": 0.0957705988053993,
+            "model__min_child_samples": 51,
+            "model__n_estimators": 775,
+            "model__num_leaves": 45,
+            "model__reg_lambda": 1.9603369861210684,
+            "model__subsample": 0.935552788417904
+          }
+        }
+      },
+      "error_analysis": {
+        "by_city": [
+          {
+            "group": "Faisalabad",
+            "n": 374,
+            "mdape": 0.16760631730769232,
+            "mape": 0.24485751884720589,
+            "mae_pkr": 3077157.054812834,
+            "bias_pct": 0.018701395493388784
+          },
+          {
+            "group": "Islamabad",
+            "n": 2069,
+            "mdape": 0.12491893333333333,
+            "mape": 0.1916627769876685,
+            "mae_pkr": 6029800.24401885,
+            "bias_pct": -0.01248959999999999
+          },
+          {
+            "group": "Karachi",
+            "n": 5008,
+            "mdape": 0.1439515861111111,
+            "mape": 0.215732440961104,
+            "mae_pkr": 4919138.844573682,
+            "bias_pct": -0.011371329002393904
+          },
+          {
+            "group": "Lahore",
+            "n": 4624,
+            "mdape": 0.12671617692307693,
+            "mape": 0.17396222421627008,
+            "mae_pkr": 4601848.33472102,
+            "bias_pct": 0.005909873295645962
+          },
+          {
+            "group": "Rawalpindi",
+            "n": 1340,
+            "mdape": 0.1461257846153846,
+            "mape": 0.2020846977786538,
+            "mae_pkr": 2930808.0483208955,
+            "bias_pct": -0.0006584299232533786
+          }
+        ],
+        "by_property_type": [
+          {
+            "group": "Farm House",
+            "n": 19,
+            "mdape": 0.5336709538461538,
+            "mape": 0.7617007951571597,
+            "mae_pkr": 37635313.5,
+            "bias_pct": 0.11106740000000004
+          },
+          {
+            "group": "Flat",
+            "n": 3370,
+            "mdape": 0.15652101846153849,
+            "mape": 0.22553431958317965,
+            "mae_pkr": 2317416.4010756677,
+            "bias_pct": -0.008156764566180974
+          },
+          {
+            "group": "House",
+            "n": 9536,
+            "mdape": 0.1302363,
+            "mape": 0.18720705446794647,
+            "mae_pkr": 5590538.757170198,
+            "bias_pct": -0.0022957677373383056
+          },
+          {
+            "group": "Lower Portion",
+            "n": 132,
+            "mdape": 0.10273926269956458,
+            "mape": 0.1566869721466303,
+            "mae_pkr": 1935151.9488636365,
+            "bias_pct": -0.001341715217758499
+          },
+          {
+            "group": "Penthouse",
+            "n": 51,
+            "mdape": 0.20665523076923076,
+            "mape": 0.23148017680479882,
+            "mae_pkr": 5983181.823529412,
+            "bias_pct": -0.15678820512820513
+          },
+          {
+            "group": "Upper Portion",
+            "n": 307,
+            "mdape": 0.11280961904761905,
+            "mape": 0.16772726032227944,
+            "mae_pkr": 3488814.7060260586,
+            "bias_pct": -0.008587419354838755
+          }
+        ],
+        "by_price_decile": [
+          {
+            "group": "1",
+            "n": 1384,
+            "mdape": 0.1832381871921182,
+            "mape": 0.342192333482202,
+            "mae_pkr": 921613.8587427746,
+            "bias_pct": 0.14632951172141917
+          },
+          {
+            "group": "2",
+            "n": 1359,
+            "mdape": 0.15310983333333333,
+            "mape": 0.22432135868057765,
+            "mae_pkr": 1165704.788263429,
+            "bias_pct": 0.046945400000000026
+          },
+          {
+            "group": "3",
+            "n": 1302,
+            "mdape": 0.13605917380952381,
+            "mape": 0.19188885469536296,
+            "mae_pkr": 1386651.285906298,
+            "bias_pct": 0.006256462179398792
+          },
+          {
+            "group": "4",
+            "n": 1323,
+            "mdape": 0.1379217,
+            "mape": 0.18512470341117487,
+            "mae_pkr": 1739457.6547619049,
+            "bias_pct": 0.011280470588235225
+          },
+          {
+            "group": "5",
+            "n": 1478,
+            "mdape": 0.12380873581681476,
+            "mape": 0.17100176037509904,
+            "mae_pkr": 2130827.186062246,
+            "bias_pct": -0.019563948649616192
+          },
+          {
+            "group": "6",
+            "n": 1243,
+            "mdape": 0.13600862857142856,
+            "mape": 0.17328604006381343,
+            "mae_pkr": 2752814.9790828642,
+            "bias_pct": -0.023735822784810123
+          },
+          {
+            "group": "7",
+            "n": 1380,
+            "mdape": 0.10440236363636364,
+            "mape": 0.14398605787757218,
+            "mae_pkr": 2978636.250362319,
+            "bias_pct": -0.018499131405681823
+          },
+          {
+            "group": "8",
+            "n": 1431,
+            "mdape": 0.13514218181818183,
+            "mape": 0.1790518659124938,
+            "mae_pkr": 5302660.003144654,
+            "bias_pct": -0.03870570370370374
+          },
+          {
+            "group": "9",
+            "n": 1174,
+            "mdape": 0.11810717714285715,
+            "mape": 0.15501897006852908,
+            "mae_pkr": 6699212.289182283,
+            "bias_pct": -0.03272431664454156
+          },
+          {
+            "group": "10",
+            "n": 1341,
+            "mdape": 0.15850014545454547,
+            "mape": 0.19795100214046335,
+            "mae_pkr": 22644854.664243102,
+            "bias_pct": -0.080217720754717
+          }
+        ],
+        "by_location_listings": [
+          {
+            "group": "not in training data",
+            "n": 63,
+            "mdape": 0.21366455555555555,
+            "mape": 0.3435906444425452,
+            "mae_pkr": 6882873.666666667,
+            "bias_pct": 0.008215375000000025
+          },
+          {
+            "group": "1-19 listings (grouped as Other)",
+            "n": 1517,
+            "mdape": 0.16951896,
+            "mape": 0.2431061062754574,
+            "mae_pkr": 3631202.5916282134,
+            "bias_pct": -0.0016769166666666946
+          },
+          {
+            "group": "20-49 listings",
+            "n": 922,
+            "mdape": 0.14607121153846153,
+            "mape": 0.21492885137016499,
+            "mae_pkr": 4630435.770336226,
+            "bias_pct": 0.02060736695864751
+          },
+          {
+            "group": "50-199 listings",
+            "n": 2638,
+            "mdape": 0.13188292424242423,
+            "mape": 0.19454418527320005,
+            "mae_pkr": 4710388.962187263,
+            "bias_pct": -0.004050067502716415
+          },
+          {
+            "group": "200+ listings",
+            "n": 8275,
+            "mdape": 0.1306755,
+            "mape": 0.18633229561755116,
+            "mae_pkr": 4934183.3264652565,
+            "bias_pct": -0.006124609375000034
+          }
+        ],
+        "weakest": [
+          "By city, the weakest group is 'Faisalabad' with a median error of 16.8% (n=374) against 13.6% overall; the strongest is 'Islamabad' at 12.5%.",
+          "By property type, the weakest group is 'Penthouse' with a median error of 20.7% (n=51) against 13.6% overall; the strongest is 'Lower Portion' at 10.3%.",
+          "By price decile, the weakest group is '1' with a median error of 18.3% (n=1384) against 13.6% overall; the strongest is '7' at 10.4%.",
+          "By location coverage, the weakest group is 'not in training data' with a median error of 21.4% (n=63) against 13.6% overall; the strongest is '200+ listings' at 13.1%."
+        ],
+        "worst_10": [
+          {
+            "city": "Islamabad",
+            "location": "F-11",
+            "property_type": "House",
+            "area_sqft": 1361.25,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 1000000.0,
+            "predicted_price": 12989526.0,
+            "ape": 11.989526,
+            "actual_ppsf": 734.6189164370983,
+            "location_median_ppsf_train": 10101.0101010101,
+            "location_train_listings": 399,
+            "likely_reason": "Asking price per sq ft is 13.7x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 1143.45,
+            "bedrooms": 2,
+            "baths": 2,
+            "actual_price": 650000.0,
+            "predicted_price": 6545000.0,
+            "ape": 9.069230769230769,
+            "actual_ppsf": 568.4551139096593,
+            "location_median_ppsf_train": 5465.914556823647,
+            "location_train_listings": 1357,
+            "likely_reason": "Asking price per sq ft is 9.6x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Sea View Apartments",
+            "property_type": "House",
+            "area_sqft": 25046.999999999996,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 35000000.0,
+            "predicted_price": 276906336.0,
+            "ape": 6.9116096,
+            "actual_ppsf": 1397.3729388749155,
+            "location_median_ppsf_train": 13684.07785520085,
+            "location_train_listings": 51,
+            "likely_reason": "Asking price per sq ft is 9.8x below the usual for this location, possibly a missing digit or a price quoted per unit; very large area per bedroom, possibly an area unit mix-up (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Gulistan E Jauhar",
+            "property_type": "Flat",
+            "area_sqft": 1932.975,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 1500000.0,
+            "predicted_price": 11216418.0,
+            "ape": 6.477612,
+            "actual_ppsf": 776.0058976448221,
+            "location_median_ppsf_train": 5949.930714820997,
+            "location_train_listings": 2288,
+            "likely_reason": "Asking price per sq ft is 7.7x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Islamabad",
+            "location": "G-15",
+            "property_type": "Flat",
+            "area_sqft": 762.3,
+            "bedrooms": 1,
+            "baths": 1,
+            "actual_price": 735000.0,
+            "predicted_price": 4824121.5,
+            "ape": 5.563430612244898,
+            "actual_ppsf": 964.1873278236915,
+            "location_median_ppsf_train": 7162.534435261708,
+            "location_train_listings": 267,
+            "likely_reason": "Asking price per sq ft is 7.4x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Dastgir Colony",
+            "property_type": "House",
+            "area_sqft": 1306.8,
+            "bedrooms": 4,
+            "baths": 3,
+            "actual_price": 2000000.0,
+            "predicted_price": 13081495.0,
+            "ape": 5.5407475,
+            "actual_ppsf": 1530.4560759106214,
+            "location_median_ppsf_train": 6536.863239482654,
+            "location_train_listings": 25,
+            "likely_reason": "Asking price per sq ft is 4.3x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 1143.45,
+            "bedrooms": 2,
+            "baths": 2,
+            "actual_price": 1000000.0,
+            "predicted_price": 6337796.0,
+            "ape": 5.337796,
+            "actual_ppsf": 874.5463290917836,
+            "location_median_ppsf_train": 5465.914556823647,
+            "location_train_listings": 1357,
+            "likely_reason": "Asking price per sq ft is 6.2x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 1987.425,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 2050000.0,
+            "predicted_price": 12238472.0,
+            "ape": 4.9699863414634144,
+            "actual_ppsf": 1031.4854648603093,
+            "location_median_ppsf_train": 5465.914556823647,
+            "location_train_listings": 1357,
+            "likely_reason": "Asking price per sq ft is 5.3x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "North Nazimabad",
+            "property_type": "Flat",
+            "area_sqft": 1687.95,
+            "bedrooms": 2,
+            "baths": 2,
+            "actual_price": 1800000.0,
+            "predicted_price": 10079986.0,
+            "ape": 4.599992222222222,
+            "actual_ppsf": 1066.3822980538523,
+            "location_median_ppsf_train": 7109.215320359015,
+            "location_train_listings": 1207,
+            "likely_reason": "Asking price per sq ft is 6.7x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Gulshan E Iqbal Town",
+            "property_type": "Upper Portion",
+            "area_sqft": 60983.99999999999,
+            "bedrooms": 4,
+            "baths": 4,
+            "actual_price": 32500000.0,
+            "predicted_price": 173981024.0,
+            "ape": 4.353262276923077,
+            "actual_ppsf": 532.9266692903058,
+            "location_median_ppsf_train": 7460.973370064279,
+            "location_train_listings": 1937,
+            "likely_reason": "Asking price per sq ft is 14.0x below the usual for this location, possibly a missing digit or a price quoted per unit; very large area per bedroom, possibly an area unit mix-up (an automatic guess)"
+          }
+        ]
+      }
+    },
+    "time": {
+      "train_rows": 53524,
+      "test_rows": 13549,
+      "train_date_range": [
+        "2018-08-05",
+        "2019-07-03"
+      ],
+      "test_date_range": [
+        "2019-07-04",
+        "2019-08-06"
+      ],
+      "search_rows": 40000,
+      "chosen_model": "lightgbm",
+      "models": {
+        "baseline_median": {
+          "label": "Baseline: overall median price",
+          "test": {
+            "mae_pkr": 16306590.006642556,
+            "rmse_pkr": 35497380.89499435,
+            "mdape": 0.6266666666666671,
+            "mape": 1.180883531203843,
+            "r2_log": -0.0017310503627683271,
+            "rmse_log": 1.0165133375343844
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.9887939957146574,
+              "std": 0.004360029258391291
+            },
+            "r2_log": {
+              "mean": -0.005058457008352635,
+              "std": 0.0016148508268351949
+            },
+            "mae_pkr": {
+              "mean": 17816871.567251235,
+              "std": 128589.45760448962
+            },
+            "mdape": {
+              "mean": 0.6171265775700918,
+              "std": 0.0053053920313264205
+            }
+          },
+          "best_params": {}
+        },
+        "baseline_location_ppsf": {
+          "label": "Baseline: location median price/sq ft x size",
+          "test": {
+            "mae_pkr": 7346853.86193868,
+            "rmse_pkr": 24541457.372421082,
+            "mdape": 0.22807017543859895,
+            "mape": 0.4420399450145976,
+            "r2_log": 0.7718165071300276,
+            "rmse_log": 0.4851540099908708
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.4046409710475996,
+              "std": 0.0028571153985262783
+            },
+            "r2_log": {
+              "mean": 0.8316763652019687,
+              "std": 0.002257358275193858
+            },
+            "mae_pkr": {
+              "mean": 7670149.040181729,
+              "std": 140429.11943732869
+            },
+            "mdape": {
+              "mean": 0.21713740776540041,
+              "std": 0.0025182743831322933
+            }
+          },
+          "best_params": {}
+        },
+        "linear_regression": {
+          "label": "Linear Regression",
+          "test": {
+            "mae_pkr": 6492009.06613072,
+            "rmse_pkr": 15680627.512870913,
+            "mdape": 0.22030990601561426,
+            "mape": 0.37485211001559837,
+            "r2_log": 0.8214079271926835,
+            "rmse_log": 0.4292087849559356
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.3673050087584002,
+              "std": 0.0019730436261085464
+            },
+            "r2_log": {
+              "mean": 0.8613005998523237,
+              "std": 0.002007369503005897
+            },
+            "mae_pkr": {
+              "mean": 6985062.799063739,
+              "std": 77408.26731096515
+            },
+            "mdape": {
+              "mean": 0.2142387664802421,
+              "std": 0.0023613772020436227
+            }
+          },
+          "best_params": {}
+        },
+        "ridge": {
+          "label": "Ridge",
+          "test": {
+            "mae_pkr": 6494332.494941199,
+            "rmse_pkr": 15687817.767402979,
+            "mdape": 0.22023604233529054,
+            "mape": 0.3749072205038861,
+            "r2_log": 0.8213838495190746,
+            "rmse_log": 0.42923771681326184
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.36729861803507724,
+              "std": 0.001980736103030125
+            },
+            "r2_log": {
+              "mean": 0.8613054424470674,
+              "std": 0.002008184459489235
+            },
+            "mae_pkr": {
+              "mean": 6988142.3623412205,
+              "std": 77700.62165330515
+            },
+            "mdape": {
+              "mean": 0.21428806737705886,
+              "std": 0.0022656758482053614
+            }
+          },
+          "best_params": {
+            "model__alpha": 0.31489116479568624
+          }
+        },
+        "random_forest": {
+          "label": "Random Forest",
+          "test": {
+            "mae_pkr": 4910297.878410402,
+            "rmse_pkr": 13112821.002788618,
+            "mdape": 0.1540587563392551,
+            "mape": 0.2656318558795527,
+            "r2_log": 0.8882728134003804,
+            "rmse_log": 0.3394821507697123
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.29488658068729207,
+              "std": 0.0032027868376280273
+            },
+            "r2_log": {
+              "mean": 0.9105869671774304,
+              "std": 0.0023822911076684388
+            },
+            "mae_pkr": {
+              "mean": 5306153.838128286,
+              "std": 130180.46682451045
+            },
+            "mdape": {
+              "mean": 0.14960312301909742,
+              "std": 0.0014609965150091462
+            }
+          },
+          "best_params": {
+            "model__max_depth": 17,
+            "model__max_features": 0.759195090518222,
+            "model__min_samples_leaf": 7,
+            "model__n_estimators": 241
+          }
+        },
+        "xgboost": {
+          "label": "XGBoost",
+          "test": {
+            "mae_pkr": 4791936.249417108,
+            "rmse_pkr": 13859613.171839144,
+            "mdape": 0.1446994216851864,
+            "mape": 0.2308731840615819,
+            "r2_log": 0.9097091997914291,
+            "rmse_log": 0.3051822457114566
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.2666036679065852,
+              "std": 0.004079005695720245
+            },
+            "r2_log": {
+              "mean": 0.9268975556147252,
+              "std": 0.0027947935151551176
+            },
+            "mae_pkr": {
+              "mean": 4874750.599060937,
+              "std": 77675.08516895906
+            },
+            "mdape": {
+              "mean": 0.13612683452433055,
+              "std": 0.0017655667758648098
+            }
+          },
+          "best_params": {
+            "model__colsample_bytree": 0.6399899663272012,
+            "model__learning_rate": 0.07169690872413222,
+            "model__max_depth": 8,
+            "model__min_child_weight": 4,
+            "model__n_estimators": 659,
+            "model__reg_lambda": 4.170553216181044,
+            "model__subsample": 0.7061753482887407
+          }
+        },
+        "lightgbm": {
+          "label": "LightGBM",
+          "test": {
+            "mae_pkr": 4688710.761869504,
+            "rmse_pkr": 12751738.682470748,
+            "mdape": 0.14620376362630388,
+            "mape": 0.23206208734503606,
+            "r2_log": 0.9101621216555368,
+            "rmse_log": 0.3044158470925038
+          },
+          "cv": {
+            "rmse_log": {
+              "mean": 0.26633176057006525,
+              "std": 0.0040282688516533605
+            },
+            "r2_log": {
+              "mean": 0.9270465850100871,
+              "std": 0.0027827570958707977
+            },
+            "mae_pkr": {
+              "mean": 4866116.2263244875,
+              "std": 92893.01783598466
+            },
+            "mdape": {
+              "mean": 0.13607898819457817,
+              "std": 0.002043972973781404
+            }
+          },
+          "best_params": {
+            "model__colsample_bytree": 0.6798695128633439,
+            "model__learning_rate": 0.07957992095277988,
+            "model__min_child_samples": 12,
+            "model__n_estimators": 784,
+            "model__num_leaves": 81,
+            "model__reg_lambda": 3.8376955479268844,
+            "model__subsample": 0.8351497755908628
+          }
+        }
+      },
+      "error_analysis": {
+        "by_city": [
+          {
+            "group": "Faisalabad",
+            "n": 538,
+            "mdape": 0.1675160930350748,
+            "mape": 0.2354958744351531,
+            "mae_pkr": 3190428.9653939335,
+            "bias_pct": -0.023423331578780737
+          },
+          {
+            "group": "Islamabad",
+            "n": 2391,
+            "mdape": 0.13213994716837077,
+            "mape": 0.252461870044671,
+            "mae_pkr": 5792634.5584222935,
+            "bias_pct": -0.0005381795237079379
+          },
+          {
+            "group": "Karachi",
+            "n": 5188,
+            "mdape": 0.16835781796675364,
+            "mape": 0.2608940415120489,
+            "mae_pkr": 4765116.5638311,
+            "bias_pct": 0.015655992610442482
+          },
+          {
+            "group": "Lahore",
+            "n": 3741,
+            "mdape": 0.12975966057039576,
+            "mape": 0.18051200308246804,
+            "mae_pkr": 5036186.4334299285,
+            "bias_pct": 0.002600457492786701
+          },
+          {
+            "group": "Rawalpindi",
+            "n": 1691,
+            "mdape": 0.14586531168316658,
+            "mape": 0.22771284377229467,
+            "mae_pkr": 2601362.45971802,
+            "bias_pct": 0.016795403494202832
+          }
+        ],
+        "by_property_type": [
+          {
+            "group": "Farm House",
+            "n": 24,
+            "mdape": 0.4221519490327565,
+            "mape": 0.6858158148182296,
+            "mae_pkr": 30313332.85084018,
+            "bias_pct": 0.2894554201894566
+          },
+          {
+            "group": "Flat",
+            "n": 3379,
+            "mdape": 0.1742411379232632,
+            "mape": 0.29530519147691453,
+            "mae_pkr": 2391636.1698950143,
+            "bias_pct": 0.025011385353724602
+          },
+          {
+            "group": "House",
+            "n": 9621,
+            "mdape": 0.13860920194997514,
+            "mape": 0.20820235157877046,
+            "mae_pkr": 5521527.267476714,
+            "bias_pct": 0.002588400317228734
+          },
+          {
+            "group": "Lower Portion",
+            "n": 152,
+            "mdape": 0.15356780493904137,
+            "mape": 0.23414939423689596,
+            "mae_pkr": 2488978.823558058,
+            "bias_pct": -0.021835071969684483
+          },
+          {
+            "group": "Penthouse",
+            "n": 45,
+            "mdape": 0.26929956699379143,
+            "mape": 0.4395300143120576,
+            "mae_pkr": 8818597.9624598,
+            "bias_pct": 0.1288261589168591
+          },
+          {
+            "group": "Upper Portion",
+            "n": 328,
+            "mdape": 0.1433143881933106,
+            "mape": 0.2177713926047582,
+            "mae_pkr": 2502158.4639924443,
+            "bias_pct": 0.021363201360040662
+          }
+        ],
+        "by_price_decile": [
+          {
+            "group": "1",
+            "n": 1357,
+            "mdape": 0.24825974329241407,
+            "mape": 0.5249815366498116,
+            "mae_pkr": 1145426.7507697497,
+            "bias_pct": 0.22586719501584018
+          },
+          {
+            "group": "2",
+            "n": 1369,
+            "mdape": 0.16939477376549436,
+            "mape": 0.24844987402529492,
+            "mae_pkr": 1197994.0045715047,
+            "bias_pct": 0.061591416099436636
+          },
+          {
+            "group": "3",
+            "n": 1375,
+            "mdape": 0.14447356044810963,
+            "mape": 0.22157334703516882,
+            "mae_pkr": 1502828.8307938268,
+            "bias_pct": 0.015422360900216647
+          },
+          {
+            "group": "4",
+            "n": 1430,
+            "mdape": 0.152576397331656,
+            "mape": 0.22881063726311582,
+            "mae_pkr": 2052211.884004144,
+            "bias_pct": 0.028513801009653283
+          },
+          {
+            "group": "5",
+            "n": 1375,
+            "mdape": 0.13359479204866617,
+            "mape": 0.19016789178830756,
+            "mae_pkr": 2258172.8213199815,
+            "bias_pct": -0.013360554762480659
+          },
+          {
+            "group": "6",
+            "n": 1346,
+            "mdape": 0.13417610969745525,
+            "mape": 0.1836443366340135,
+            "mae_pkr": 2726168.5561524583,
+            "bias_pct": -0.01965794739607407
+          },
+          {
+            "group": "7",
+            "n": 1254,
+            "mdape": 0.11986233322272269,
+            "mape": 0.16764014584634218,
+            "mae_pkr": 3189956.9065274615,
+            "bias_pct": -0.008056570472141145
+          },
+          {
+            "group": "8",
+            "n": 1367,
+            "mdape": 0.12583364240640119,
+            "mape": 0.17341198128430424,
+            "mae_pkr": 4536646.487842773,
+            "bias_pct": -0.044690062185857804
+          },
+          {
+            "group": "9",
+            "n": 1321,
+            "mdape": 0.1260118405237941,
+            "mape": 0.17188294445074329,
+            "mae_pkr": 6627750.557812089,
+            "bias_pct": -0.012498152013292407
+          },
+          {
+            "group": "10",
+            "n": 1355,
+            "mdape": 0.1602570140382378,
+            "mape": 0.20429550993296247,
+            "mae_pkr": 21845329.06318604,
+            "bias_pct": -0.061911115410098305
+          }
+        ],
+        "by_location_listings": [
+          {
+            "group": "not in training data",
+            "n": 76,
+            "mdape": 0.2584735589601639,
+            "mape": 0.3253960968871867,
+            "mae_pkr": 5035120.97440624,
+            "bias_pct": 0.03620659946016347
+          },
+          {
+            "group": "1-19 listings (grouped as Other)",
+            "n": 1508,
+            "mdape": 0.17706495036788877,
+            "mape": 0.2608439044799064,
+            "mae_pkr": 3686575.1970032924,
+            "bias_pct": -0.010475094491715353
+          },
+          {
+            "group": "20-49 listings",
+            "n": 981,
+            "mdape": 0.14283550207265203,
+            "mape": 0.244809632593154,
+            "mae_pkr": 3176297.891531561,
+            "bias_pct": 0.008651022069000147
+          },
+          {
+            "group": "50-199 listings",
+            "n": 2689,
+            "mdape": 0.13785541352639888,
+            "mape": 0.23299328421022156,
+            "mae_pkr": 4513587.893637416,
+            "bias_pct": 0.005819900410581447
+          },
+          {
+            "group": "200+ listings",
+            "n": 8295,
+            "mdape": 0.1432026113260636,
+            "mape": 0.224165077673731,
+            "mae_pkr": 5103355.2072152635,
+            "bias_pct": 0.01032620423014019
+          }
+        ],
+        "weakest": [
+          "By city, the weakest group is 'Karachi' with a median error of 16.8% (n=5188) against 14.6% overall; the strongest is 'Lahore' at 13.0%.",
+          "By property type, the weakest group is 'Penthouse' with a median error of 26.9% (n=45) against 14.6% overall; the strongest is 'House' at 13.9%.",
+          "By price decile, the weakest group is '1' with a median error of 24.8% (n=1357) against 14.6% overall; the strongest is '7' at 12.0%.",
+          "By location coverage, the weakest group is 'not in training data' with a median error of 25.8% (n=76) against 14.6% overall; the strongest is '50-199 listings' at 13.8%."
+        ],
+        "worst_10": [
+          {
+            "city": "Islamabad",
+            "location": "G-6",
+            "property_type": "Flat",
+            "area_sqft": 1824.075,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 900000.0,
+            "predicted_price": 23071703.653979417,
+            "ape": 24.63522628219935,
+            "actual_ppsf": 493.4007647711854,
+            "location_median_ppsf_train": 12243.648607284971,
+            "location_train_listings": 33,
+            "likely_reason": "Asking price per sq ft is 24.8x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Islamabad",
+            "location": "F-7",
+            "property_type": "House",
+            "area_sqft": 10890.0,
+            "bedrooms": 7,
+            "baths": 8,
+            "actual_price": 10000000.0,
+            "predicted_price": 218784603.19418454,
+            "ape": 20.878460319418455,
+            "actual_ppsf": 918.2736455463728,
+            "location_median_ppsf_train": 18365.472910927456,
+            "location_train_listings": 135,
+            "likely_reason": "Asking price per sq ft is 20.0x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "House",
+            "area_sqft": 3811.5,
+            "bedrooms": 4,
+            "baths": 0,
+            "actual_price": 1500000.0,
+            "predicted_price": 16564478.745302973,
+            "ape": 10.042985830201982,
+            "actual_ppsf": 393.5458480913026,
+            "location_median_ppsf_train": 5597.096506187415,
+            "location_train_listings": 1318,
+            "likely_reason": "Asking price per sq ft is 14.2x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 2368.575,
+            "bedrooms": 3,
+            "baths": 3,
+            "actual_price": 1300000.0,
+            "predicted_price": 13428359.36786569,
+            "ape": 9.32950720605053,
+            "actual_ppsf": 548.853213430016,
+            "location_median_ppsf_train": 5597.096506187415,
+            "location_train_listings": 1318,
+            "likely_reason": "Asking price per sq ft is 10.2x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Islamabad",
+            "location": "Gulberg",
+            "property_type": "Flat",
+            "area_sqft": 598.95,
+            "bedrooms": 1,
+            "baths": 1,
+            "actual_price": 375000.0,
+            "predicted_price": 3850427.193792602,
+            "ape": 9.267805850113605,
+            "actual_ppsf": 626.0956674179814,
+            "location_median_ppsf_train": 6340.2621253860925,
+            "location_train_listings": 190,
+            "likely_reason": "Asking price per sq ft is 10.1x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Islamabad",
+            "location": "Gulberg",
+            "property_type": "Flat",
+            "area_sqft": 925.65,
+            "bedrooms": 1,
+            "baths": 1,
+            "actual_price": 550000.0,
+            "predicted_price": 5433956.3818261875,
+            "ape": 8.879920694229432,
+            "actual_ppsf": 594.1770647653001,
+            "location_median_ppsf_train": 6340.2621253860925,
+            "location_train_listings": 190,
+            "likely_reason": "Asking price per sq ft is 10.7x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 1143.45,
+            "bedrooms": 2,
+            "baths": 2,
+            "actual_price": 650000.0,
+            "predicted_price": 6371261.357271321,
+            "ape": 8.801940549648187,
+            "actual_ppsf": 568.4551139096593,
+            "location_median_ppsf_train": 5597.096506187415,
+            "location_train_listings": 1318,
+            "likely_reason": "Asking price per sq ft is 9.8x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Islamabad",
+            "location": "B-17",
+            "property_type": "House",
+            "area_sqft": 1361.25,
+            "bedrooms": 4,
+            "baths": 4,
+            "actual_price": 950000.0,
+            "predicted_price": 8580537.557607919,
+            "ape": 8.03214479748202,
+            "actual_ppsf": 697.8879706152434,
+            "location_median_ppsf_train": 5142.332415059688,
+            "location_train_listings": 206,
+            "likely_reason": "Asking price per sq ft is 7.4x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 3566.475,
+            "bedrooms": 4,
+            "baths": 4,
+            "actual_price": 1670000.0,
+            "predicted_price": 14880497.53721184,
+            "ape": 7.910477567192718,
+            "actual_ppsf": 468.2494620037993,
+            "location_median_ppsf_train": 5597.096506187415,
+            "location_train_listings": 1318,
+            "likely_reason": "Asking price per sq ft is 12.0x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          },
+          {
+            "city": "Karachi",
+            "location": "Bahria Town Karachi",
+            "property_type": "Flat",
+            "area_sqft": 3566.475,
+            "bedrooms": 4,
+            "baths": 4,
+            "actual_price": 1680000.0,
+            "predicted_price": 14880497.53721184,
+            "ape": 7.857439010245142,
+            "actual_ppsf": 471.053350997834,
+            "location_median_ppsf_train": 5597.096506187415,
+            "location_train_listings": 1318,
+            "likely_reason": "Asking price per sq ft is 11.9x below the usual for this location, possibly a missing digit or a price quoted per unit (an automatic guess)"
+          }
+        ]
+      }
+    }
+  },
+  "encoding_ablation": {
+    "target_encoding": {
+      "rmse_log": {
+        "mean": 0.27669844478192457,
+        "std": 0.003180470991652696
+      },
+      "r2_log": {
+        "mean": 0.9225176761083411,
+        "std": 0.0020375347721546884
+      },
+      "mae_pkr": {
+        "mean": 4961181.295098868,
+        "std": 88278.59146295775
+      },
+      "mdape": {
+        "mean": 0.1418935774223608,
+        "std": 0.001578246607696969
+      }
+    },
+    "one_hot": {
+      "rmse_log": {
+        "mean": 0.27623831046131037,
+        "std": 0.0027662294643057738
+      },
+      "r2_log": {
+        "mean": 0.9227814571602065,
+        "std": 0.001661368871478333
+      },
+      "mae_pkr": {
+        "mean": 4965038.501078743,
+        "std": 116167.10121818059
+      },
+      "mdape": {
+        "mean": 0.14149200733484454,
+        "std": 0.0015502267611293005
+      }
+    }
+  },
+  "intervals": {
+    "random": {
+      "level": 0.8,
+      "method": "LightGBM quantile regression (10% and 90%)",
+      "overall": {
+        "n": 13415,
+        "coverage": 0.7382035035408125,
+        "mean_width_pkr": 12929707.184158158,
+        "median_width_pkr": 6459383.876950906,
+        "mean_relative_width": 0.5374701763697233
+      },
+      "by_city": [
+        {
+          "city": "Faisalabad",
+          "n": 374,
+          "coverage": 0.7005347593582888,
+          "mean_width_pkr": 8204804.282296747,
+          "median_width_pkr": 4965102.826801332,
+          "mean_relative_width": 0.611482710210436
+        },
+        {
+          "city": "Islamabad",
+          "n": 2069,
+          "coverage": 0.7177380376993717,
+          "mean_width_pkr": 15532018.874970175,
+          "median_width_pkr": 7075802.618086528,
+          "mean_relative_width": 0.50132706761437
+        },
+        {
+          "city": "Karachi",
+          "n": 5008,
+          "coverage": 0.7531948881789138,
+          "mean_width_pkr": 13709312.277986338,
+          "median_width_pkr": 6493339.023829278,
+          "mean_relative_width": 0.5941153956323639
+        },
+        {
+          "city": "Lahore",
+          "n": 4624,
+          "coverage": 0.7322664359861591,
+          "mean_width_pkr": 12725449.221669119,
+          "median_width_pkr": 6632204.709487517,
+          "mean_relative_width": 0.48421205155025665
+        },
+        {
+          "city": "Rawalpindi",
+          "n": 1340,
+          "coverage": 0.744776119402985,
+          "mean_width_pkr": 8021615.621220785,
+          "median_width_pkr": 5356318.369819079,
+          "mean_relative_width": 0.5446983222326393
+        }
+      ]
+    },
+    "time": {
+      "level": 0.8,
+      "method": "LightGBM quantile regression (10% and 90%)",
+      "overall": {
+        "n": 13549,
+        "coverage": 0.6782050335818142,
+        "mean_width_pkr": 11235138.2318087,
+        "median_width_pkr": 5871124.198544874,
+        "mean_relative_width": 0.5273621065091331
+      },
+      "by_city": [
+        {
+          "city": "Faisalabad",
+          "n": 538,
+          "coverage": 0.6579925650557621,
+          "mean_width_pkr": 6738662.72673196,
+          "median_width_pkr": 4410281.295633301,
+          "mean_relative_width": 0.5281788220445686
+        },
+        {
+          "city": "Islamabad",
+          "n": 2391,
+          "coverage": 0.671685487243831,
+          "mean_width_pkr": 12756546.95609661,
+          "median_width_pkr": 6559642.101993807,
+          "mean_relative_width": 0.448739490982925
+        },
+        {
+          "city": "Karachi",
+          "n": 5188,
+          "coverage": 0.6700077101002313,
+          "mean_width_pkr": 11808139.174409136,
+          "median_width_pkr": 6019674.033154242,
+          "mean_relative_width": 0.6228465988065215
+        },
+        {
+          "city": "Lahore",
+          "n": 3741,
+          "coverage": 0.689922480620155,
+          "mean_width_pkr": 12120596.299879791,
+          "median_width_pkr": 5947007.36243476,
+          "mean_relative_width": 0.45293430114537775
+        },
+        {
+          "city": "Rawalpindi",
+          "n": 1691,
+          "coverage": 0.6930810171496156,
+          "mean_width_pkr": 6797638.550610509,
+          "median_width_pkr": 4941881.582811547,
+          "mean_relative_width": 0.5099807668237729
+        }
+      ]
+    }
+  },
+  "shap": {
+    "model": "XGBRegressor",
+    "sample_size": 2000,
+    "top_features": [
+      {
+        "feature": "Size (sq ft)",
+        "mean_abs_shap": 0.4363638162612915
+      },
+      {
+        "feature": "Location (encoded price level)",
+        "mean_abs_shap": 0.12331784516572952
+      },
+      {
+        "feature": "Latitude",
+        "mean_abs_shap": 0.11470840126276016
+      },
+      {
+        "feature": "Size (log sq ft)",
+        "mean_abs_shap": 0.10299261659383774
+      },
+      {
+        "feature": "Property type: House",
+        "mean_abs_shap": 0.09569913148880005
+      },
+      {
+        "feature": "Bedrooms",
+        "mean_abs_shap": 0.0849539116024971
+      },
+      {
+        "feature": "Bathrooms",
+        "mean_abs_shap": 0.06130349636077881
+      },
+      {
+        "feature": "Distance to city centre (km)",
+        "mean_abs_shap": 0.05895591527223587
+      },
+      {
+        "feature": "Longitude",
+        "mean_abs_shap": 0.05041194334626198
+      },
+      {
+        "feature": "Property type: Flat",
+        "mean_abs_shap": 0.027262844145298004
+      },
+      {
+        "feature": "City: Rawalpindi",
+        "mean_abs_shap": 0.01148113515228033
+      },
+      {
+        "feature": "City: Karachi",
+        "mean_abs_shap": 0.00847688689827919
+      },
+      {
+        "feature": "City: Lahore",
+        "mean_abs_shap": 0.0062687029130756855
+      },
+      {
+        "feature": "City: Faisalabad",
+        "mean_abs_shap": 0.0031254435889422894
+      },
+      {
+        "feature": "City: Islamabad",
+        "mean_abs_shap": 0.002648463472723961
+      }
+    ],
+    "group_importance": [
+      {
+        "group": "Size",
+        "mean_abs_shap": 0.5392171503400605
+      },
+      {
+        "group": "Location",
+        "mean_abs_shap": 0.2290779572353058
+      },
+      {
+        "group": "Property type",
+        "mean_abs_shap": 0.12413218087122078
+      },
+      {
+        "group": "Bedrooms",
+        "mean_abs_shap": 0.08495394729184955
+      },
+      {
+        "group": "Bathrooms",
+        "mean_abs_shap": 0.061303446920122955
+      },
+      {
+        "group": "Distance to city centre",
+        "mean_abs_shap": 0.05895594027443803
+      },
+      {
+        "group": "City",
+        "mean_abs_shap": 0.021894686908139307
+      }
+    ],
+    "example_sentence": "Property type pulled this price down the most (-25%), while location pushed it up (+30%).",
+    "unit": "log price"
+  }
+}

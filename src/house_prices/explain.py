@@ -29,8 +29,8 @@ GROUP_OF = {
     "num__log_area_sqft": "Size",
     "num__bedrooms": "Bedrooms",
     "num__baths": "Bathrooms",
-    "num__latitude": "Coordinates",
-    "num__longitude": "Coordinates",
+    "num__latitude": "Location",
+    "num__longitude": "Location",
     "num__distance_to_centre_km": "Distance to city centre",
     f"loc__{features.LOCATION_FEATURE}": "Location",
 }

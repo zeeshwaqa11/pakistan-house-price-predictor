@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 import streamlit as st  # noqa: E402
-from common import bundle_or_stop, disclaimer, listings_or_none, synthetic_banner  # noqa: E402
+from common import bundle_or_stop, disclaimer, listings_or_none, metrics_or_none, synthetic_banner  # noqa: E402
 
 from house_prices import config, formatting, predict  # noqa: E402
 
@@ -113,7 +113,16 @@ with right:
         f"{formatting.format_exact(prediction.upper)}</span>",
         unsafe_allow_html=True,
     )
-    st.caption("About 8 in 10 similar listings had an asking price inside a range like this in testing.")
+    coverage_block = (metrics_or_none() or {}).get("intervals", {})
+    if coverage_block:
+        random_cov = coverage_block["random"]["overall"]["coverage"]
+        time_cov = coverage_block["time"]["overall"]["coverage"]
+        st.caption(
+            f"The range is built to hold about 80% of asking prices. In testing it held {random_cov:.0%} of listings "
+            f"on a random split and {time_cov:.0%} on a time split, so treat it as a typical range, not a guarantee."
+        )
+    else:
+        st.caption("The range is built to hold about 80% of asking prices; it is not a guarantee.")
     metric_a, metric_b = st.columns(2)
     metric_a.metric("Price per sq ft", formatting.format_exact(prediction.ppsf))
     metric_b.metric("Size in sq ft", f"{prediction.area_sqft:,.0f}")

@@ -7,6 +7,8 @@ import pandas as pd
 
 from house_prices import config
 
+PRIVATE_COLUMNS = {"agent", "agency", "pageurl"}
+
 
 class DataMissingError(FileNotFoundError):
     pass
@@ -28,10 +30,19 @@ def file_sha256(path: Path, chunk: int = 1 << 20) -> str:
     return digest.hexdigest()
 
 
+def sniff_delimiter(path: Path) -> str:
+    with open(path, "rb") as handle:
+        header = handle.readline().decode("utf-8", errors="ignore")
+    counts = {sep: header.count(sep) for sep in (",", ";", "	", "|")}
+    best = max(counts, key=counts.get)
+    return best if counts[best] > 0 else ","
+
+
 def read_csv_any_encoding(path: Path) -> pd.DataFrame:
+    sep = sniff_delimiter(path)
     for encoding in ("utf-8", "utf-8-sig", "latin-1"):
         try:
-            return pd.read_csv(path, encoding=encoding, low_memory=False)
+            return pd.read_csv(path, sep=sep, encoding=encoding, low_memory=False)
         except UnicodeDecodeError:
             continue
     raise SchemaError(f"Could not decode {path} as utf-8 or latin-1")
@@ -99,9 +110,12 @@ def schema_report(df: pd.DataFrame, sample_rows: int = 5) -> str:
             f"distinct={series.nunique(dropna=True):>8,}"
         )
     lines.append("")
-    lines.append(f"Sample ({sample_rows} random rows):")
+    private = [c for c in df.columns if normalise_name(c) in PRIVATE_COLUMNS]
+    lines.append(f"Sample ({sample_rows} random rows; columns with personal or contact details hidden: {private}):")
     with pd.option_context("display.max_columns", None, "display.width", 200, "display.max_colwidth", 40):
-        lines.append(df.sample(min(sample_rows, len(df)), random_state=config.RANDOM_STATE).to_string())
+        lines.append(
+            df.drop(columns=private).sample(min(sample_rows, len(df)), random_state=config.RANDOM_STATE).to_string()
+        )
     return "\n".join(lines)
 
 

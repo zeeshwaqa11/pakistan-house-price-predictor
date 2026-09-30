@@ -248,6 +248,7 @@ class CleaningSettings:
     min_city_listings: int = 50
     min_type_listings: int = 30
     max_centre_km: float = 100.0
+    near_dup_coordinate_decimals: int | None = 4
     ppsf_iqr_k: float = 3.0
     ppsf_min_group: int = 100
     marla_sqft: str | float = MARLA_SQFT_SETTING

@@ -173,17 +173,18 @@ def rule_exact_duplicates(df, s):
 
 
 def rule_near_duplicates(df, s):
-    key = pd.DataFrame(
-        {
-            "city": df["city"],
-            "location": df["location"],
-            "area": df["area_sqft"].round(0),
-            "price": df["price"],
-            "bedrooms": df["bedrooms"],
-            "property_type": df["property_type"],
-        }
-    )
-    return ~key.duplicated(keep="first")
+    columns = {
+        "city": df["city"],
+        "location": df["location"],
+        "area": df["area_sqft"].round(0),
+        "price": df["price"],
+        "bedrooms": df["bedrooms"],
+        "property_type": df["property_type"],
+    }
+    if s.near_dup_coordinate_decimals is not None:
+        columns["lat"] = df["latitude"].round(s.near_dup_coordinate_decimals)
+        columns["lon"] = df["longitude"].round(s.near_dup_coordinate_decimals)
+    return ~pd.DataFrame(columns).duplicated(keep="first")
 
 
 def ppsf_bounds(df: pd.DataFrame, s: CleaningSettings) -> pd.DataFrame:
@@ -269,7 +270,7 @@ STEPS = FILTER_STEPS + [
     Step(
         "near_duplicates",
         "filter",
-        "Near duplicates: same city, location, size, price, bedrooms and type",
+        "Near duplicates: same city, location, size, price, bedrooms, type and coordinates (to about 11 m)",
         rule_near_duplicates,
     ),
     Step(
@@ -369,8 +370,13 @@ def funnel_markdown(funnel: list[dict], info: dict, settings: CleaningSettings, 
         "- Outlier fences use only the price and area of listings, computed on the full cleaned file before "
         "any train/test split. The evaluation therefore describes performance on plausible listings, not on "
         "every raw record.",
-        "- Near-duplicate removal can also drop genuinely distinct units (for example two identical flats in "
-        "one building priced the same).",
+        "- The scrape contains the same advertisement re-listed on many dates. Near duplicates are listings that agree "
+        "on city, location, size, price, bedrooms, type and coordinates rounded to about 11 m. Without the "
+        "coordinates, distinct houses that merely share a round price and a Marla size (very common in large "
+        "societies) were also removed; set `near_dup_coordinate_decimals=None` in `CleaningSettings` for the "
+        "coordinate-free rule.",
+        "- Near-duplicate removal can still drop genuinely distinct units that share every field and location "
+        "coordinates (for example two identical flats in one building priced the same).",
     ]
     return "\n".join(lines) + "\n"
 

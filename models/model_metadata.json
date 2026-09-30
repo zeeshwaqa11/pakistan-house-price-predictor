@@ -1,0 +1,248 @@
+{
+  "training_date": "2026-09-30T10:45:34+00:00",
+  "libraries": {
+    "python": "3.12.10",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0",
+    "lightgbm": "4.7.0",
+    "shap": "0.51.0",
+    "joblib": "1.6.0"
+  },
+  "setup": "random",
+  "model": "xgboost",
+  "model_label": "XGBoost",
+  "parameters": {
+    "model__colsample_bytree": 0.6399899663272012,
+    "model__learning_rate": 0.07169690872413222,
+    "model__max_depth": 8,
+    "model__min_child_weight": 4,
+    "model__n_estimators": 659,
+    "model__reg_lambda": 4.170553216181044,
+    "model__subsample": 0.7061753482887407
+  },
+  "search_space": {
+    "model__n_estimators": [
+      "randint",
+      300,
+      800
+    ],
+    "model__learning_rate": [
+      "loguniform",
+      0.03,
+      0.2
+    ],
+    "model__max_depth": [
+      "randint",
+      4,
+      10
+    ],
+    "model__subsample": [
+      "uniform",
+      0.7,
+      0.3
+    ],
+    "model__colsample_bytree": [
+      "uniform",
+      0.6,
+      0.4
+    ],
+    "model__min_child_weight": [
+      "randint",
+      1,
+      10
+    ],
+    "model__reg_lambda": [
+      "loguniform",
+      0.5,
+      10.0
+    ]
+  },
+  "cv_folds": 5,
+  "cv_rows": 40000,
+  "cv_scores": {
+    "rmse_log": {
+      "mean": 0.2764812728956598,
+      "std": 0.0036138067713895475
+    },
+    "r2_log": {
+      "mean": 0.9226355896058148,
+      "std": 0.00227477021997425
+    },
+    "mae_pkr": {
+      "mean": 4868174.076517187,
+      "std": 69181.65124963253
+    },
+    "mdape": {
+      "mean": 0.14083374128953013,
+      "std": 0.0023865755846229843
+    }
+  },
+  "features": {
+    "input_columns": [
+      "area_sqft",
+      "bedrooms",
+      "baths",
+      "property_type",
+      "city",
+      "location",
+      "latitude",
+      "longitude"
+    ],
+    "numeric": [
+      "area_sqft",
+      "log_area_sqft",
+      "bedrooms",
+      "baths",
+      "latitude",
+      "longitude",
+      "distance_to_centre_km"
+    ],
+    "categorical": [
+      "city",
+      "property_type"
+    ],
+    "location": "location_key"
+  },
+  "categories": {
+    "city": [
+      "Faisalabad",
+      "Islamabad",
+      "Karachi",
+      "Lahore",
+      "Rawalpindi"
+    ],
+    "property_type": [
+      "Farm House",
+      "Flat",
+      "House",
+      "Lower Portion",
+      "Penthouse",
+      "Upper Portion"
+    ]
+  },
+  "target": "log(price in PKR)",
+  "min_location_count": 20,
+  "rare_location_count": 50,
+  "random_state": 42,
+  "train_rows": 53658,
+  "train_date_range": [
+    "2018-08-05",
+    "2019-08-06"
+  ],
+  "data_rows_raw": 191393,
+  "data_rows_clean": 67073,
+  "data_file": "C:\\Portfolio Projects\\pakistan-house-prices\\data\\raw\\pakistan_property.csv",
+  "data_file_sha256": "6ae4408d335619a2b0386721ea9512b00211fab8c5c7e76b93f50522331704f9",
+  "marla_sqft": 272.25,
+  "marla_source": "default 272.25 sq ft per Marla; the data has too few locations listing both Marla and sq ft/sq yd areas to infer a factor",
+  "synthetic_data": false,
+  "model_comparison_cv": {
+    "linear_regression": {
+      "label": "Linear Regression",
+      "cv": {
+        "rmse_log": {
+          "mean": 0.37990493701736294,
+          "std": 0.0050306324871768685
+        },
+        "r2_log": {
+          "mean": 0.8538979119542418,
+          "std": 0.005322886750092954
+        },
+        "mae_pkr": {
+          "mean": 6975755.518200691,
+          "std": 88494.26663004507
+        },
+        "mdape": {
+          "mean": 0.21588313813402102,
+          "std": 0.0017560814642999017
+        }
+      }
+    },
+    "ridge": {
+      "label": "Ridge",
+      "cv": {
+        "rmse_log": {
+          "mean": 0.3790981973967368,
+          "std": 0.004452409791353149
+        },
+        "r2_log": {
+          "mean": 0.8545429361123551,
+          "std": 0.004366814015729814
+        },
+        "mae_pkr": {
+          "mean": 7008411.183296664,
+          "std": 74748.79982518607
+        },
+        "mdape": {
+          "mean": 0.21600662204156945,
+          "std": 0.0022064388076872806
+        }
+      }
+    },
+    "random_forest": {
+      "label": "Random Forest",
+      "cv": {
+        "rmse_log": {
+          "mean": 0.30135261858830387,
+          "std": 0.003520772815626955
+        },
+        "r2_log": {
+          "mean": 0.9080891765629584,
+          "std": 0.0026413630229383633
+        },
+        "mae_pkr": {
+          "mean": 5291460.704617225,
+          "std": 113435.1207167839
+        },
+        "mdape": {
+          "mean": 0.15081184075343002,
+          "std": 0.0017812462624945573
+        }
+      }
+    },
+    "xgboost": {
+      "label": "XGBoost",
+      "cv": {
+        "rmse_log": {
+          "mean": 0.2764812728956598,
+          "std": 0.0036138067713895475
+        },
+        "r2_log": {
+          "mean": 0.9226355896058148,
+          "std": 0.00227477021997425
+        },
+        "mae_pkr": {
+          "mean": 4868174.076517187,
+          "std": 69181.65124963253
+        },
+        "mdape": {
+          "mean": 0.14083374128953013,
+          "std": 0.0023865755846229843
+        }
+      }
+    },
+    "lightgbm": {
+      "label": "LightGBM",
+      "cv": {
+        "rmse_log": {
+          "mean": 0.27669844478192457,
+          "std": 0.003180470991652696
+        },
+        "r2_log": {
+          "mean": 0.9225176761083411,
+          "std": 0.0020375347721546884
+        },
+        "mae_pkr": {
+          "mean": 4961181.295098868,
+          "std": 88278.59146295775
+        },
+        "mdape": {
+          "mean": 0.1418935774223608,
+          "std": 0.001578246607696969
+        }
+      }
+    }
+  }
+}

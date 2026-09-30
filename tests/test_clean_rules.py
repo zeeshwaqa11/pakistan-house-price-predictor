@@ -106,11 +106,30 @@ def test_exact_duplicates_ignore_listing_id():
     assert kept(clean.rule_exact_duplicates, df) == [True, True, False]
 
 
-def test_near_duplicates_same_key_different_coordinates():
+def test_near_duplicates_without_coordinates_ignore_position():
     df = base_rows(3, location=["Same", "Same", "Other"])
     df["price"] = 1e7
     df["area_sqft"] = [2000.2, 1999.8, 2000.0]
+    literal = CleaningSettings(near_dup_coordinate_decimals=None)
+    assert kept(clean.rule_near_duplicates, df, literal) == [True, False, True]
+
+
+def test_near_duplicates_with_coordinates_keep_distinct_plots():
+    df = base_rows(3, location=["Same", "Same", "Same"])
+    df["price"] = 1e7
+    df["area_sqft"] = 2000.0
+    df["latitude"] = [31.55, 31.55, 31.56]
+    df["longitude"] = [74.34, 74.34, 74.34]
     assert kept(clean.rule_near_duplicates, df) == [True, False, True]
+
+
+def test_near_duplicates_coordinates_rounded_to_about_eleven_metres():
+    df = base_rows(2, location=["Same", "Same"])
+    df["price"] = 1e7
+    df["area_sqft"] = 2000.0
+    df["latitude"] = [31.550001, 31.550002]
+    df["longitude"] = [74.340001, 74.340002]
+    assert kept(clean.rule_near_duplicates, df) == [True, False]
 
 
 def test_near_duplicates_different_bedrooms_are_kept():

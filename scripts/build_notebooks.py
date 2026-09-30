@@ -67,7 +67,7 @@ print("Synthetic sample file:", synthetic)
         code(
             """
 canonical = load.apply_schema(raw)
-canonical.head()
+canonical.drop(columns=["agency"]).head()
 """
         ),
         md(

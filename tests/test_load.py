@@ -55,3 +55,19 @@ def test_file_hash_is_stable(tmp_path):
     path.write_text("a,b\n1,2\n")
     assert load.file_sha256(path) == load.file_sha256(path)
     assert len(load.file_sha256(path)) == 64
+
+
+@pytest.mark.parametrize("sep", [",", ";", "\t", "|"])
+def test_delimiter_is_detected(tmp_path, sep):
+    path = tmp_path / "d.csv"
+    path.write_text(sep.join(["a", "b", "c"]) + "\n" + sep.join(["1", "x, y", "3"]).replace("x, y", "xy") + "\n")
+    df = load.read_csv_any_encoding(path)
+    assert list(df.columns) == ["a", "b", "c"]
+    assert df.shape == (1, 3)
+
+
+def test_semicolon_file_with_quoted_fields(tmp_path):
+    path = tmp_path / "q.csv"
+    path.write_text('"price";"city"\n1000;"Lahore"\n')
+    df = load.read_csv_any_encoding(path)
+    assert df["city"].iloc[0] == "Lahore"

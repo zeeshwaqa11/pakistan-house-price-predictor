@@ -40,19 +40,84 @@ Errors are in rupees on the held-out test set; R² is on log price. Two evaluati
 (stratified by city) and a time split (test = newest 20% of listings), which is the more realistic of the two.
 
 <!-- BEGIN:RESULTS -->
-_Not generated yet. Run the pipeline on the real dataset and then `python -m scripts.update_readme`._
+
+**Random split**: train 53,658 listings (2018-08-05 to 2019-08-06), test 13,415 (2018-08-05 to 2019-08-06).
+
+| Model | MAE | RMSE | Median % error | Mean % error | R² (log price) | CV RMSE (log), mean ± std |
+|---|---|---|---|---|---|---|
+| Baseline: overall median price | PKR 1.76 Crore | PKR 3.96 Crore | 61.4% | 96.8% | -0.006 | 0.996 ± 0.008 |
+| Baseline: location median price/sq ft x size | PKR 75.9 Lakh | PKR 3.03 Crore | 21.8% | 35.2% | 0.820 | 0.423 ± 0.005 |
+| Linear Regression | PKR 68.16 Lakh | PKR 1.85 Crore | 21.1% | 30.4% | 0.857 | 0.380 ± 0.005 |
+| Ridge | PKR 68.44 Lakh | PKR 1.86 Crore | 21.1% | 30.4% | 0.857 | 0.379 ± 0.004 |
+| Random Forest | PKR 49.75 Lakh | PKR 1.56 Crore | 14.5% | 21.5% | 0.915 | 0.301 ± 0.004 |
+| **XGBoost** | PKR 47.31 Lakh | PKR 1.45 Crore | 13.6% | 19.7% | 0.929 | 0.276 ± 0.004 |
+| LightGBM | PKR 47.02 Lakh | PKR 1.51 Crore | 13.7% | 19.8% | 0.928 | 0.277 ± 0.003 |
+
+**Time split**: train 53,524 listings (2018-08-05 to 2019-07-03), test 13,549 (2019-07-04 to 2019-08-06).
+
+| Model | MAE | RMSE | Median % error | Mean % error | R² (log price) | CV RMSE (log), mean ± std |
+|---|---|---|---|---|---|---|
+| Baseline: overall median price | PKR 1.63 Crore | PKR 3.55 Crore | 62.7% | 118.1% | -0.002 | 0.989 ± 0.004 |
+| Baseline: location median price/sq ft x size | PKR 73.47 Lakh | PKR 2.45 Crore | 22.8% | 44.2% | 0.772 | 0.405 ± 0.003 |
+| Linear Regression | PKR 64.92 Lakh | PKR 1.57 Crore | 22.0% | 37.5% | 0.821 | 0.367 ± 0.002 |
+| Ridge | PKR 64.94 Lakh | PKR 1.57 Crore | 22.0% | 37.5% | 0.821 | 0.367 ± 0.002 |
+| Random Forest | PKR 49.1 Lakh | PKR 1.31 Crore | 15.4% | 26.6% | 0.888 | 0.295 ± 0.003 |
+| XGBoost | PKR 47.92 Lakh | PKR 1.39 Crore | 14.5% | 23.1% | 0.910 | 0.267 ± 0.004 |
+| **LightGBM** | PKR 46.89 Lakh | PKR 1.28 Crore | 14.6% | 23.2% | 0.910 | 0.266 ± 0.004 |
+
+Bold rows are the best tree model by cross-validation, chosen without looking at the test set. Cross-validation used up to 40000 training rows for the tuning search.
 <!-- END:RESULTS -->
 
 ### 80% prediction interval
 
 <!-- BEGIN:INTERVALS -->
-_Not generated yet. Run the pipeline on the real dataset and then `python -m scripts.update_readme`._
+
+Nominal coverage is 80%.
+
+| Split | Empirical coverage | Mean width | Median width | Mean width / estimate |
+|---|---|---|---|---|
+| random | 73.8% | PKR 1.29 Crore | PKR 64.59 Lakh | 54% |
+| time | 67.8% | PKR 1.12 Crore | PKR 58.71 Lakh | 53% |
+
+Per city, random split:
+
+| City | Test listings | Coverage | Mean width |
+|---|---|---|---|
+| Faisalabad | 374 | 70.1% | PKR 82.05 Lakh |
+| Islamabad | 2,069 | 71.8% | PKR 1.55 Crore |
+| Karachi | 5,008 | 75.3% | PKR 1.37 Crore |
+| Lahore | 4,624 | 73.2% | PKR 1.27 Crore |
+| Rawalpindi | 1,340 | 74.5% | PKR 80.22 Lakh |
+
+Per city, time split:
+
+| City | Test listings | Coverage | Mean width |
+|---|---|---|---|
+| Faisalabad | 538 | 65.8% | PKR 67.39 Lakh |
+| Islamabad | 2,391 | 67.2% | PKR 1.28 Crore |
+| Karachi | 5,188 | 67.0% | PKR 1.18 Crore |
+| Lahore | 3,741 | 69.0% | PKR 1.21 Crore |
+| Rawalpindi | 1,691 | 69.3% | PKR 67.98 Lakh |
 <!-- END:INTERVALS -->
 
 ### Weakest areas
 
 <!-- BEGIN:ERRORS -->
-_Not generated yet. Run the pipeline on the real dataset and then `python -m scripts.update_readme`._
+
+**Random split**
+
+- By city, the weakest group is 'Faisalabad' with a median error of 16.8% (n=374) against 13.6% overall; the strongest is 'Islamabad' at 12.5%.
+- By property type, the weakest group is 'Penthouse' with a median error of 20.7% (n=51) against 13.6% overall; the strongest is 'Lower Portion' at 10.3%.
+- By price decile, the weakest group is '1' with a median error of 18.3% (n=1384) against 13.6% overall; the strongest is '7' at 10.4%.
+- By location coverage, the weakest group is 'not in training data' with a median error of 21.4% (n=63) against 13.6% overall; the strongest is '200+ listings' at 13.1%.
+
+**Time split**
+
+- By city, the weakest group is 'Karachi' with a median error of 16.8% (n=5188) against 14.6% overall; the strongest is 'Lahore' at 13.0%.
+- By property type, the weakest group is 'Penthouse' with a median error of 26.9% (n=45) against 14.6% overall; the strongest is 'House' at 13.9%.
+- By price decile, the weakest group is '1' with a median error of 24.8% (n=1357) against 14.6% overall; the strongest is '7' at 12.0%.
+- By location coverage, the weakest group is 'not in training data' with a median error of 25.8% (n=76) against 14.6% overall; the strongest is '50-199 listings' at 13.8%.
+
 <!-- END:ERRORS -->
 
 ## Limitations
