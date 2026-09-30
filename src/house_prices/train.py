@@ -207,9 +207,7 @@ def encoding_ablation(train_df, lgbm_params: dict, fast: bool, max_rows: int | N
     X, y = features.make_inputs(subset), features.make_target(subset)
     out = {}
     for label, encoding in (("target_encoding", "target"), ("one_hot", "onehot")):
-        model = lightgbm.LGBMRegressor(
-            n_jobs=-1, random_state=config.RANDOM_STATE, verbose=-1, subsample_freq=1
-        )
+        model = lightgbm.LGBMRegressor(n_jobs=-1, random_state=config.RANDOM_STATE, verbose=-1, subsample_freq=1)
         pipeline = features.build_pipeline(model, location_encoding=encoding)
         pipeline.set_params(**lgbm_params)
         scores = cross_validate(pipeline, X, y, cv=cv, scoring=make_scorers())

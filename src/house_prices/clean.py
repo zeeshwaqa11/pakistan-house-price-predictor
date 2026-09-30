@@ -110,9 +110,7 @@ def prepare(raw: pd.DataFrame, settings: CleaningSettings) -> tuple[pd.DataFrame
             "date_added": parse_dates(canonical["date_added"]),
         }
     )
-    info["unit_counts"] = {
-        str(k): int(v) for k, v in parsed["area_unit_norm"].value_counts(dropna=False).items()
-    }
+    info["unit_counts"] = {str(k): int(v) for k, v in parsed["area_unit_norm"].value_counts(dropna=False).items()}
     return parsed[PARSED_COLUMNS].reset_index(drop=True), info
 
 
@@ -191,9 +189,7 @@ def rule_near_duplicates(df, s):
 def ppsf_bounds(df: pd.DataFrame, s: CleaningSettings) -> pd.DataFrame:
     log_ppsf = np.log(df["price"] / df["area_sqft"])
     global_q1, global_q3 = log_ppsf.quantile([0.25, 0.75])
-    per_city = log_ppsf.groupby(df["city"]).agg(
-        n="size", q1=lambda v: v.quantile(0.25), q3=lambda v: v.quantile(0.75)
-    )
+    per_city = log_ppsf.groupby(df["city"]).agg(n="size", q1=lambda v: v.quantile(0.25), q3=lambda v: v.quantile(0.75))
     thin = per_city["n"] < s.ppsf_min_group
     per_city.loc[thin, "q1"] = global_q1
     per_city.loc[thin, "q3"] = global_q3
@@ -349,8 +345,7 @@ def funnel_markdown(funnel: list[dict], info: dict, settings: CleaningSettings, 
     ]
     for row in funnel:
         lines.append(
-            f"| {row['key']} | {row['description']} | {row['removed']:,} | "
-            f"{row['modified']:,} | {row['remaining']:,} |"
+            f"| {row['key']} | {row['description']} | {row['removed']:,} | {row['modified']:,} | {row['remaining']:,} |"
         )
     lines += [
         "",

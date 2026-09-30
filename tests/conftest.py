@@ -34,7 +34,7 @@ def tmp_root(tmp_path, monkeypatch):
 
 @pytest.fixture(scope="session")
 def pipeline_root(tmp_path_factory, synthetic_raw):
-    from house_prices import clean, config, split, train
+    from house_prices import clean, config, evaluate, split, train
 
     root = tmp_path_factory.mktemp("pipeline")
     raw_path = root / "data" / "raw" / config.RAW_FILENAME
@@ -47,6 +47,7 @@ def pipeline_root(tmp_path_factory, synthetic_raw):
             assert clean.main([]) == 0
             assert split.main([]) == 0
             assert train.main(["--fast"]) == 0
+            assert evaluate.main([]) == 0
     finally:
         if previous_fast is None:
             os.environ.pop("HOUSE_PRICES_FAST", None)

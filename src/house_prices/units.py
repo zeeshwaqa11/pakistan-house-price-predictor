@@ -174,9 +174,7 @@ def resolve_marla_factor(
         inferred, groups = infer_marla_factor(df, min_groups, min_group_size)
         low, high = config.MARLA_PLAUSIBLE_RANGE
         if inferred is not None and low <= inferred <= high:
-            return inferred, (
-                f"inferred from {groups} location/type groups that list both Marla and sq ft/sq yd areas"
-            )
+            return inferred, (f"inferred from {groups} location/type groups that list both Marla and sq ft/sq yd areas")
         if inferred is not None:
             return config.MARLA_SQFT_FALLBACK, (
                 f"data implied {inferred:.1f} sq ft per Marla from {groups} groups, outside the plausible "
