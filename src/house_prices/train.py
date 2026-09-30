@@ -23,7 +23,7 @@ from house_prices.evaluate import BASELINES, MODEL_LABELS, make_scorers
 
 MODEL_NAMES = ["linear_regression", "ridge", "random_forest", "xgboost", "lightgbm"]
 TREE_MODELS = ["random_forest", "xgboost", "lightgbm"]
-SEARCH_MAX_ROWS = 60_000
+SEARCH_MAX_ROWS = 40_000
 
 SEARCH_SPACES = {
     "linear_regression": {},
@@ -54,7 +54,7 @@ SEARCH_SPACES = {
     },
 }
 
-SEARCH_ITERATIONS = {"linear_regression": 0, "ridge": 8, "random_forest": 4, "xgboost": 10, "lightgbm": 10}
+SEARCH_ITERATIONS = {"linear_regression": 0, "ridge": 8, "random_forest": 3, "xgboost": 8, "lightgbm": 8}
 
 FAST_OVERRIDES = {
     "random_forest": {"model__n_estimators": ("randint", 15, 25), "model__max_depth": ("randint", 4, 8)},

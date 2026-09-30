@@ -26,3 +26,4 @@ select = ["E", "F", "I", "W"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/build_notebooks.py" = ["E501"]
+"scripts/notebook_cells_modelling.py" = ["E501"]

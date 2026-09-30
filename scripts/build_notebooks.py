@@ -409,9 +409,23 @@ print("\\n".join("- " + line for line in lines))
     return new_notebook(cells=cells)
 
 
+def modelling_notebook():
+    from scripts.notebook_cells_modelling import build
+
+    return build(md, code, SETUP)[0]
+
+
+def error_notebook():
+    from scripts.notebook_cells_modelling import build
+
+    return build(md, code, SETUP)[1]
+
+
 BUILDERS = {
     "01_data_audit.ipynb": audit_notebook,
     "02_eda.ipynb": eda_notebook,
+    "03_modelling.ipynb": modelling_notebook,
+    "04_error_analysis.ipynb": error_notebook,
 }
 
 
