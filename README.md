@@ -47,7 +47,7 @@ intervals with measured coverage, and SHAP explanations.
 2. Save it as `data/raw/pakistan_property.csv`.
 3. If a step is run without the file, it stops with a message saying where to put it.
 
-Column names are not assumed. `python -m house_prices.load` prints the file's real schema, row count and a sample, and
+Some versions of the dataset (for example `Zameen Property Data.csv` from "zameencom-property-data-pakistan") have no `Area Size` / `Area Type` columns, only an `area` text column such as `5.6 Marla` or `2 Kanal`, and dates like `07-17-2019` (month first); both layouts are handled. Column names are not assumed. `python -m house_prices.load` prints the file's real schema, row count and a sample, and
 the mapping from your file's columns to the project's canonical names. If a column is not found, edit
 `COLUMN_ALIASES` in `src/house_prices/config.py`; lookups ignore case, spaces and underscores.
 
