@@ -140,7 +140,10 @@ with right:
 
 st.divider()
 st.subheader("Why this estimate?")
-area_label = formatting.format_area(prediction.area_sqft, bundle.marla_sqft)
+if unit == "Sq. Ft.":
+    area_label = f"{prediction.area_sqft:,.0f} sq ft"
+else:
+    area_label = f"{size:g} {unit}, {prediction.area_sqft:,.0f} sq ft"
 explanation = predict.explain_inputs(bundle, prediction, area_label)
 st.markdown(f"**{explanation['sentence']}**")
 st.pyplot(explanation["figure"], clear_figure=True)

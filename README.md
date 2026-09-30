@@ -430,15 +430,29 @@ pakistan-house-prices/
 
 ## Screenshots
 
-Capture these once the model has been trained on the real data (save into `reports/figures/screenshots/`):
+Captured from the running app on the real model and data (`reports/figures/screenshots/`).
 
-1. **Predict** with an example preset selected: estimate, range, waterfall and comparables visible.
-2. **Predict** with a rare location selected, showing the reliability warning.
-3. **Market explorer** with the map and a city filter applied.
-4. **Model performance** showing the random and time split tables.
-5. **About & limitations.**
+### Predict
 
-Screenshots: _to be added_.
+![Predict page: estimate, 80% range, SHAP waterfall and comparable listings](reports/figures/screenshots/1_predict.png)
+
+### Predict with a rare location
+
+The app warns when a location has few training listings, so the estimate is less reliable.
+
+![Predict page with the rare-location warning](reports/figures/screenshots/2_predict_rare_location.png)
+
+### Market explorer
+
+![Market explorer: price map, price per sq ft charts and location rankings](reports/figures/screenshots/3_market_explorer.png)
+
+### Model performance
+
+![Model performance: tables for both splits, error analysis, intervals and SHAP](reports/figures/screenshots/4_model_performance.png)
+
+### About & limitations
+
+![About and limitations page](reports/figures/screenshots/5_about_and_limitations.png)
 
 ## Licence
 
